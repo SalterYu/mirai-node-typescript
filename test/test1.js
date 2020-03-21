@@ -1,0 +1,1 @@
+const Mirai = require('../lib')

@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "module": "commonjs",
+    "outDir": "./lib/",
+    "rootDir": "./src",
+    "target": "es6",
+    "lib": [
+      "es2019"
+    ],
+    "declaration": true,
+    "declarationDir": "./lib",
+    "allowJs": true,
+    "noImplicitAny": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "typeRoots": [
+      "typings",
+      "node_modules/@types"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@utils": ["./src/utils/index"],
+      "@config": ["./src/config/config.ts"],
+      "@modules/*": ["./src/modules/*"],
+      "@core/*": ["./src/core/*"]
+    }
+  },
+  "include": [
+    "./src",
+    "typings"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

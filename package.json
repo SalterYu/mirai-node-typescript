@@ -1,0 +1,68 @@
+{
+  "name": "mirai-node-typescript",
+  "version": "0.0.2",
+  "description": "node mirai typescript",
+  "main": "./lib/index.js",
+  "types": "./lib/",
+  "scripts": {
+    "clean": "rm -rf ./lib",
+    "server": "ts-node --project ./tsconfig.json -r tsconfig-paths/register ./src/index.ts",
+    "dev": "ts-node-dev --project ./tsconfig.json -r tsconfig-paths/register ./src/index.ts",
+    "build": "tsc -d -p tsconfig.json"
+  },
+  "files": [
+    "lib",
+    "test",
+    "typings"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/SalterYu/mirai-node-typescript.git"
+  },
+  "keywords": [
+    "node",
+    "mirai",
+    "bot",
+    "typescript"
+  ],
+  "dependencies": {
+    "nodemon": "^2.0.2",
+    "request": "^2.88.0",
+    "axios": "^0.19.2",
+    "form-data": "^3.0.0",
+    "websocket": "^1.0.31",
+    "module-alias": "^2.2.2"
+  },
+  "devDependencies": {
+    "http-server": "^0.12.1",
+    "typescript": "^3.7.5",
+    "typescript-eslint-parser": "^22.0.0",
+    "json5": "^2.1.1",
+    "@types/node": "^12.0.10",
+    "@types/axios": "^0.14.0",
+    "@types/json5": "^0.0.30",
+    "@typescript-eslint/eslint-plugin": "^1.11.0",
+    "@typescript-eslint/parser": "^1.11.0",
+    "babel-eslint": "^10.0.3",
+    "chalk": "^3.0.0",
+    "mkdirp": "^1.0.3",
+    "ts-node": "^8.6.2",
+    "tsconfig-paths": "^3.9.0",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "tspath": "^1.3.7",
+    "cross-env": "^5.0.5"
+  },
+  "author": "koishi (salteryu)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SalterYu/mirai-node-typescript/issues"
+  },
+  "homepage": "https://github.com/SalterYu/mirai-node-typescript#readme",
+  "_moduleAliases": {
+    "@services": "dist/services",
+    "@utils": "dist/utils",
+    "@config": "dist/config/config",
+    "@modules": "dist/modules",
+    "@core": "dist/core"
+  }
+}
