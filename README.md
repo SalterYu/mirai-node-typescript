@@ -98,3 +98,17 @@ yarn add tsconfig-paths
 }
 
 ```
+
+### mirai-config.json配置说明
+```vue
+{
+  "authKey": "", // 默认由插件随机生成，建议手动指定
+  "port": 9999, // 端口
+  "enableWebsocket": true, // 启用 websocket
+  "host": "",
+  "qq": "", // bot的qq
+  "enableMsg": true, // 启用消息监听用于websocket
+  "enableEvent": false // 启用事件监听用于websocket
+}
+
+```
