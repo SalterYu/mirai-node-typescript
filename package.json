@@ -1,6 +1,6 @@
 {
   "name": "mirai-node-typescript",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "node mirai typescript",
   "main": "./lib/index.js",
   "types": "./lib/",
@@ -8,6 +8,7 @@
     "clean": "rm -rf ./lib",
     "server": "ts-node --project ./tsconfig.json -r tsconfig-paths/register ./src/index.ts",
     "dev": "ts-node-dev --project ./tsconfig.json -r tsconfig-paths/register ./src/index.ts",
+    "test": "ts-node-dev --project ./tsconfig.json -r tsconfig-paths/register ./test/index.ts",
     "build": "tsc -d -p tsconfig.json"
   },
   "files": [
@@ -32,7 +33,8 @@
     "axios": "^0.19.2",
     "form-data": "^3.0.0",
     "websocket": "^1.0.31",
-    "module-alias": "^2.2.2"
+    "module-alias": "^2.2.2",
+    "mirai-node-typescript": "^0.0.3"
   },
   "devDependencies": {
     "http-server": "^0.12.1",
