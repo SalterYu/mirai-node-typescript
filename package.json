@@ -1,6 +1,6 @@
 {
   "name": "mirai-node-typescript",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "node mirai typescript",
   "main": "./lib/index.js",
   "types": "./lib/",

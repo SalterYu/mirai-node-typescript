@@ -1,6 +1,15 @@
 mirai-node-typescript
 ======
 
+#### work environment
+```vue
+mirai-console-wrapper-0.1.3-all.jar
+
+mirai-api-http-v1.2.3.jar
+```
+
+<a href="https://github.com/mamoe/mirai-api-http">how to use mirai</a>
+
 #### install
 ```vue
 yarn add mirai-node-typescript
