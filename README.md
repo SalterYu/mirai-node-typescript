@@ -6,6 +6,22 @@ mirai-node-typescript
 yarn add mirai-node-typescript
 ```
 
+#### listen callback
+```vue
+mirai.onListenMessage({
+  // msg  
+  msgCallback(msg) {
+    // do something
+    console.log(msg)
+  },
+  // event
+  eventCallback(event) {
+    // do something
+    console.log(event)
+  }
+})
+```
+
 #### use in typescript
 ```vue
 import Mirai from 'mirai-node-typescript'
@@ -15,7 +31,7 @@ const mirai = new Mirai() // auto connect
 
 #### use in js
 ```vue
-const Mirai = require('mirai-node-typescript')
+const Mirai = require('mirai-node-typescript').default
 
 const mirai = new Mirai()  // auto connect
 ```

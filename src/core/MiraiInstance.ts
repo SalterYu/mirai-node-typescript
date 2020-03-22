@@ -2,15 +2,19 @@ import axios from "../modules/axios";
 import Log from "../utils/log";
 import SignIn from "./SignIn";
 import bus from "../utils/event-bus";
+import { TypedEvent } from "../utils/typed-event";
 
 const WebSocket = require("websocket").w3cwebsocket;
 
 class MiraiInstance {
   options: IMiraiOptions;
   sessionKey: string;
+  msgBus: TypedEvent<IMiraiMessagePrivate | IMiraiMessageGroup>;
+  eventBus: TypedEvent<IMiraiEvent>;
   status: number; // 0 表示成功
   constructor(options: IMiraiOptions) {
-
+    this.msgBus = new TypedEvent<IMiraiMessagePrivate | IMiraiMessageGroup>();
+    this.eventBus = new TypedEvent<IMiraiEvent>();
   }
 
   /**
@@ -32,15 +36,18 @@ class MiraiInstance {
   /**
    * 监听消息
    */
-  protected async onListenMessage() {
-    bus.on("message", (msg: IMiraiMessagePrivate | IMiraiMessageGroup) => {
-      console.log('msg', msg)
-      this.getGroupConfig(755963193).then(res => {
-        console.log(res);
-      });
+  public async onListenMessage({
+    msgCallback,
+    eventCallback
+  }: {
+    msgCallback?: (msg: IMiraiMessagePrivate | IMiraiMessageGroup) => void;
+    eventCallback?: (event: IMiraiEvent) => void
+  }) {
+    this.msgBus.on((msg: IMiraiMessagePrivate | IMiraiMessageGroup) => {
+      msgCallback && msgCallback(msg)
     });
-    bus.on("event", (event: IMiraiEvent) => {
-      console.log("event", event);
+    this.eventBus.on((event: IMiraiEvent) => {
+      eventCallback && eventCallback(event)
     });
   }
 
@@ -67,13 +74,10 @@ class MiraiInstance {
       const wsHost = await this._getWsHost();
       const client = new WebSocket(wsHost);
       client.onmessage = function(res: any) {
-        const data:
-          | IMiraiMessagePrivate
-          | IMiraiMessageGroup
-          | IMiraiEvent = JSON.parse(res.data);
+        const data = JSON.parse(res.data);
         const type = data.type;
-        if (type.indexOf("Message") > -1) bus.emit("message", data);
-        if (type.indexOf("Event") > -1) bus.emit("event", data);
+        if (type.indexOf("Message") > -1) self.msgBus.emit(data);
+        if (type.indexOf("Event") > -1) self.eventBus.emit(data);
       };
     } else {
       // 轮询暂时有问题
@@ -463,13 +467,13 @@ class MiraiInstance {
     memberId: number;
     info: IGroupMemberInfo;
   }) {
-    const url = `/memberInfo`
-    const res = await axios.post<IResponse.IResponseBase<''>>(url, {
+    const url = `/memberInfo`;
+    const res = await axios.post<IResponse.IResponseBase<"">>(url, {
       target: groupId,
       memberId,
       info
-    })
-    return res.data
+    });
+    return res.data;
   }
 
   /**
@@ -477,18 +481,21 @@ class MiraiInstance {
    * @param groupId
    * @param memberId
    */
-  public async getMemberInfo(groupId: number, memberId: number): Promise<IGroupMemberInfo> {
-    const url = `/memberInfo`
+  public async getMemberInfo(
+    groupId: number,
+    memberId: number
+  ): Promise<IGroupMemberInfo> {
+    const url = `/memberInfo`;
     const res = await axios({
       url,
-      method: 'get',
+      method: "get",
       params: {
         sessionKey: this.sessionKey,
         target: groupId,
         memberId
       }
-    })
-    return res.data
+    });
+    return res.data;
   }
 }
 

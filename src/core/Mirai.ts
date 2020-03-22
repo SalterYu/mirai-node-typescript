@@ -1,4 +1,3 @@
-
 import MiraiInstance from "./MiraiInstance";
 import Log from "../utils/log";
 import { getConfig } from "../utils";
@@ -26,7 +25,6 @@ class Mirai extends MiraiInstance {
     }
     if (this._checkOptions()) {
       this.init();
-      this.onListenMessage();
     }
   }
 
